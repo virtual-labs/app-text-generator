@@ -142,7 +142,7 @@ Users add inputs in the Prompt Template to generate the desired content.
 
 ### Generating an API Key
 
-Users can generate their Gemeni API key from [this link](link).
+Users can generate their Gemeni API key from [this link](https://ai.google.dev/gemini-api/docs/api-key).
 
 ### Basic Usage
 
