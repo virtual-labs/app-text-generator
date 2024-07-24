@@ -2,23 +2,23 @@
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Components](#components)
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Frontend Setup](#frontend-setup)
-  - [Backend Setup](#backend-setup)
-- [Configuration](#configuration)
-  - [Environment Variables](#environment-variables)
-  - [Google Sheet Structure](#google-sheet-structure)
-  - [Hierarchical Structure](#hierarchical-structure)
-- [Usage](#usage)
-  - [Generating an API Key](#generating-an-api-key)
-  - [Basic Usage](#basic-usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Support](#support)
+- [Virtual Labs Prompt Repository](#virtual-labs-prompt-repository)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [Key Features](#key-features)
+  - [Components](#components)
+  - [Usage](#usage)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+    - [Frontend Setup](#frontend-setup)
+    - [Backend Setup](#backend-setup)
+    - [Set up OAuth with GitHub:](#set-up-oauth-with-github)
+    - [Generating an API Key](#generating-an-api-key)
+    - [Environment Variables](#environment-variables)
+    - [Google Sheet Structure](#google-sheet-structure)
+    - [Hierarchical Structure](#hierarchical-structure)
+    - [Basic Usage](#basic-usage)
+  - [Deployment](#deployment)
 
 ## Project Overview
 
@@ -43,13 +43,15 @@ The project is divided into two main components:
    - Developed using Flask (Python).
    - Handles server-side logic and integrates with the Gemeni API for text generation.
 
-## Installation
+## Usage
 
-### Prerequisites
+Only registered users can access the tool. To gain access, please send a request email to support@vlabs.ac.in with your GitHub ID.
 
-- **Node.js and npm** for the frontend.
-- **Python 3.9+** for the backend.
-
+1. Log in to the prompt repository using your GitHub account.
+2. Select the type of documentation you need (Social Media Prompts, Dev Manual, User Manual).
+3. Add or replace placeholders and their content to view the prompt preview on the right.
+4. Click on "Run" to generate and view the output on the screen.
+   
 ## Installation
 
 ### Prerequisites
@@ -101,6 +103,18 @@ pip install -r requirements.txt
 python server.py
 ```
 
+### Set up OAuth with GitHub:
+
+- Register a new OAuth application within GitHub account by navigating to GitHub Settings > Developer Settings > OAuth Apps > New OAuth App.
+- Set the Homepage URL to the deployment domain (https://docgen.vlabs.ac.in)
+- Set the Authorization callback URL to the callback url (https://docgen.vlabs.ac.in/callback)
+- This will generate a Client ID and Client Secret.
+
+### Generating an API Key
+
+Users can generate their Gemeni API key from [this link](https://ai.google.dev/gemini-api/docs/api-key).
+
+
 ### Environment Variables
 
 **.env file:**
@@ -138,15 +152,46 @@ Prompt Directory → Prompt Category → Prompt Template
 
 Users add inputs in the Prompt Template to generate the desired content.
 
-## Usage
-
-### Generating an API Key
-
-Users can generate their Gemeni API key from [this link](https://ai.google.dev/gemini-api/docs/api-key).
-
 ### Basic Usage
 
 1. Start the frontend and backend servers as described in the installation section.
 2. Open the frontend in your browser.
 3. Navigate through the prompt directories and categories to find the desired prompt template.
 4. Fill in the required placeholders and generate content.
+
+## Deployment
+This app is deployed on GCP (Google Cloud Platform) using App Engine for backend and bucket for frontend.
+
+Ensure that the production frontend and backend urls are updated in `frontend/config.js` and `backend/.env`
+
+
+The documentation generator tool can be deployed using the following steps:
+
+1. **Google Cloud Platform CLI Setup** :- Install the Google Cloud SDK by following the instructions [here](https://cloud.google.com/sdk/docs/install).
+
+2. **Login to GCP from CLI**
+
+```bash
+gcloud auth login
+```
+
+3. **Set the project ID**
+
+```bash
+gcloud config set project documentation-generator
+```
+
+4. **Deploy the backend**
+
+```bash
+cd backend
+gcloud app deploy
+```
+
+5. **Deploy the frontend**
+
+```bash
+cd frontend
+npm run build:prod
+gsutil cp -r build/* gs://app-text-generator
+```
