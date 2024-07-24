@@ -1,14 +1,14 @@
 import { get } from "./requests";
 
-let BASE_URL = "http://localhost:5000";
+let BASE_URL = "http://localhost:3000";
 
 console.log("NODE_ENV:", process.env.REACT_APP_FRONTEND_ENV);
 
 if (process.env.REACT_APP_FRONTEND_ENV === "production") {
   console.log("Production mode");
-  BASE_URL = "https://lab-deployment-414310.as.r.appspot.com/";
+  BASE_URL = "https://documentation-generator-429003.el.r.appspot.com";
 }
-
+// https://documentation-generator-429003.el.r.appspot.com
 // const BASE_URL = "https://lab-deployment-414310.as.r.appspot.com/";
 
 const AUTH_API = BASE_URL + "/auth/github/access_token";
