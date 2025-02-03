@@ -22,7 +22,7 @@
 
 ## Project Overview
 
-**Virtual Labs Prompt Repository** is a tool designed for Virtual Labs staff to generate various types of content, such as blogs and documentation, using large language models (LLMs). The repository contains predefined prompt templates, allowing users to input specific information to generate content efficiently.
+**Virtual Labs Prompt Repository** is a tool designed for VLEAD team to generate various types of content, such as blogs and documentation, using large language models (LLMs). The repository contains predefined prompt templates, allowing users to input specific information to generate content efficiently.
 
 ## Key Features
 
